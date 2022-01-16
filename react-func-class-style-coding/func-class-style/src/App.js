@@ -2,12 +2,35 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 
 function App() {
+  var [funcShow, setFuncShow] = useState(true);
+  var [classShow, setClassShow] = useState(true);
+
   return (
     <div className='App'>
       <h1>Hello World</h1>
+      <input type="button" value="remove func" onClick={
+        function() {
+          setFuncShow(false);
+        }
+      } ></input>
+      <input type="button" value="remove class" onClick={
+        function(){
+          setClassShow(false);
+        }
+      }></input>
+      <input type="button" value="appear func" onClick={
+        function() {
+          setFuncShow(true);
+        }
+      }></input>
+      <input type="button" value="appear class" onClick={
+        function() {
+          setClassShow(true);
+        }
+      }></input>
       {/* initNumber이라는 값을 두 개의 컴포넌트에 각각 props로 줌 */}
-      <FuncComp initNumber={2}></FuncComp> 
-      <ClassComp initNumber={2}></ClassComp>
+      {funcShow ? <FuncComp initNumber={2}></FuncComp> : null }
+      {classShow ? <ClassComp initNumber={2}></ClassComp> : null}
     </div>
   );
 }
