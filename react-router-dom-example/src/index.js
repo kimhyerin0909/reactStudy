@@ -89,7 +89,6 @@ function App() {
         <Route exact={true} path="/" element={<Home />}></Route>
         <Route path="/topics/*" element={<Topics />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
-        
       </Routes>
     </div>
   );
