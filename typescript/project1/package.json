@@ -5,21 +5,27 @@
   "main": "greeter.js",
   "scripts": {
     "bundleup": "webpack-cli",
-    "build": "webpack --mode development"
+    "start": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.0",
-    "typescript": "^4.5.5"
+    "path": "^0.12.7",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack-cli": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
+    "@webpack-cli/serve": "^1.6.1",
     "eslint": "^8.8.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-node-externals": "^3.0.0"
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.0.0-rc.6",
+    "webpack-cli": "^4.0.0-rc.1",
+    "webpack-dev-server": "^4.7.4"
   }
 }
