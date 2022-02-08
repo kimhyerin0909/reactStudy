@@ -1,0 +1,22 @@
+{
+  "name": "babel-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel" : "babel src -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.16.11"
+  }
+}
