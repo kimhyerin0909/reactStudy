@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
-import { Weather } from './components/wather';
-import { Cloud } from './components/cloud';
+import { Weather } from './interfaces/wather';
+import { Cloud } from './interfaces/cloud';
 
 const App:React.FC = () => {
   const [city, setCity] = useState('seoul');
@@ -23,8 +23,9 @@ const App:React.FC = () => {
       setWeather(cityTemp);
       setCloud(cityCloud);
     } else {
-      setWeather(null);}
-    })
+      setWeather(null);
+      setCloud(null);
+    }})
   }
   useEffect(() => {getWeather(city)}, []); // 빈 배열은 훅을 한 번만 호출한다는 의미이다
 
@@ -38,6 +39,13 @@ const App:React.FC = () => {
     getWeather(city);
   };
 
+  let ErrorMsg:string = '';
+  if(weather === null && cloud === null) {
+    ErrorMsg = `${city}의 날씨를 찾을 수 없습니다.`;
+  } else {
+    ErrorMsg = '';
+  }
+
   return (
     <div>
       <form>
@@ -46,8 +54,9 @@ const App:React.FC = () => {
         <h2>City:{city}</h2>
         {/* {weather && <h2>Temperature : {weather.temp}F</h2>} */}
       </form>
-      {weather && <h2>Temp : {weather.temp}F</h2>}
+      {weather && <h2>Temp : {Math.floor(weather.temp - 273)}°</h2>}
       {cloud && <h2>Cloud : {cloud.description}</h2>}
+      <h2>{ErrorMsg}</h2>
     </div>
   )
 
