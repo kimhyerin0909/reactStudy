@@ -1,11 +1,11 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import { Weather } from './interfaces/wather';
-import { Cloud } from './interfaces/cloud';
+import WeatherInfo from './components/WeatherInfo';
 
 const App:React.FC = () => {
+  const has = (value:any):value is boolean => !!value; // 타입가드 has 선언
   const [city, setCity] = useState('seoul');
   const [weather, setWeather] = useState<Weather|null>(null);
-  const [cloud, setCloud] = useState<Cloud|null>(null);
   // useState 훅은 타입 안정성을 위해 제네릭을 사용해야 함
 
   const getWeather = async(city:string) => {
@@ -19,12 +19,9 @@ const App:React.FC = () => {
       if(data.cod === 200) {
       const cityTemp:Weather = data.main;
       cityTemp.city = data.name;
-      const cityCloud:Cloud = data.weather[0];
       setWeather(cityTemp);
-      setCloud(cityCloud);
     } else {
       setWeather(null);
-      setCloud(null);
     }})
   }
   useEffect(() => {getWeather(city)}, []); // 빈 배열은 훅을 한 번만 호출한다는 의미이다
@@ -39,25 +36,22 @@ const App:React.FC = () => {
     getWeather(city);
   };
 
-  let ErrorMsg:string = '';
-  if(weather === null && cloud === null) {
-    ErrorMsg = `${city}의 날씨를 찾을 수 없습니다.`;
-  } else {
-    ErrorMsg = '';
-  }
+  const [msgFromChild, setMsgFromChild] = useState('');
+  const getMsgFromChild = (msg:string) => setMsgFromChild(msg);
 
   return (
-    <div>
+    <>
       <form>
         <input type="text" placeholder='Enter City' onChange={handleChange}/>
         <button type='submit' onClick={handleSubmit}>Get weather</button>
-        <h2>City:{city}</h2>
-        {/* {weather && <h2>Temperature : {weather.temp}F</h2>} */}
       </form>
-      {weather && <h2>Temp : {Math.floor(weather.temp - 273)}°</h2>}
-      {cloud && <h2>Cloud : {cloud.description}</h2>}
-      <h2>{ErrorMsg}</h2>
-    </div>
+      {msgFromChild}
+      {has(weather) ? (
+        <WeatherInfo weather={weather} parentChannel = {getMsgFromChild} children={"Hello from the parent!"}/>
+      ) : (
+        <h2>No weather avilable</h2>
+      )}
+    </>
   )
 
 }
